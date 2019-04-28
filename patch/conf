@@ -1,0 +1,27 @@
+#!/bin/bash -ex
+install()
+{
+    apt-get update
+    DEBIAN_FRONTEND=noninteractive apt-get -y \
+        -o DPkg::Options::=--force-confdef \
+        -o DPkg::Options::=--force-confold \
+        install $@
+}
+
+# installs Qemu-KVM - a highly useful package
+install qemu-kvm
+install libvirt-clients
+install libvirt-daemon-system
+install bridge-utils
+install libguestfs-tools
+install genisoimage
+install virtinst
+install libosinfo-bin
+install virt-manager
+install virt-viewer
+install gir1.2-spice-client-gtk-3.0 #Spice viewer
+install xorg
+install libsasl2-modules #compatibility with gmail smtp relay
+
+adduser root libvirt
+adduser root libvirt-qemu
